@@ -8,12 +8,10 @@ export const getListado = (offset = 0) => {
   })
 }
 
-export const getPokeInfo = (url) => {
-  return axios({
-    method: 'GET',
-    url
-  })
-}
+export const getPokeInfo = (url) => axios({
+  method: 'GET',
+  url
+})
 
 export const getUrl = (id) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`
