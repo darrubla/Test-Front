@@ -1,12 +1,15 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable consistent-return */
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { Link } from 'react-router-dom'
-
-import { addFavorites, updateFavorites, removeFavorites, db } from '../../services/firebase'
-import { getPokeInfo } from '../../services/pokeAPI'
 import Icon from '@material-ui/core/Icon';
 import { Button } from '@mui/material';
+
+import { getPokeInfo } from '../../services/pokeAPI'
+import { addFavorites, updateFavorites, removeFavorites, db } from '../../services/firebase'
 
 import './PokeCard.scss'
 
@@ -18,7 +21,7 @@ export default function PokeCard(props) {
   const [isFavorite, setIsFavorite] = useState(false)
   useEffect(() => {
     const unsubscribe = db
-      .collection("usuarios")
+      .collection('usuarios')
       .onSnapshot((snapshot) => {
         const data = snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -70,10 +73,9 @@ export default function PokeCard(props) {
       return (
         <Link
           className="poke-card container"
-          to={{
-            pathname: `/pokemon/${name}`,
-            state: { pokemon, isFavorite }
-          }}>
+          to={`/pokemon/${name}`}
+          state={{ pokemon, isFavorite }}
+        >
           <div className="poke-card__title">
             <h5>#{id} - {name}</h5>
             <Button
@@ -95,6 +97,6 @@ export default function PokeCard(props) {
 }
 
 PokeCard.propTypes = {
-  url: PropTypes.string,
-  user: PropTypes.object,
+  url: PropTypes.string.isRequired,
+  user: PropTypes.string.isRequired,
 }

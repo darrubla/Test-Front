@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import { BottomNavigation, BottomNavigationAction } from '@mui/material'
 import Icon from '@material-ui/core/Icon'
@@ -14,15 +15,16 @@ const url = [
 ]
 
 export default function Layout({ children }) {
-  const history = useHistory()
-  const [value, setValue] = useState(url.indexOf(history.location.pathname))
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [value, setValue] = useState(url.indexOf(location.pathname))
 
   useEffect(() => {
     if ([0, 1].includes(value)) {
-      history.push(url[value])
-    } else if (parseInt(value) === 2) {
+      navigate(url[value])
+    } else if (parseInt(value, 10) === 2) {
       logout()
-      history.push('/')
+      navigate('/')
     }
   }, [value]);
 
@@ -42,4 +44,8 @@ export default function Layout({ children }) {
       </BottomNavigation>
     </section>
   )
+}
+
+Layout.propTypes = {
+  children: PropTypes.array.isRequired
 }

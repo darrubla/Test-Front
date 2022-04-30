@@ -1,36 +1,35 @@
 import React from 'react'
 import {
-  BrowserRouter,
-  Switch,
+  Routes,
   Route,
+  BrowserRouter,
+  Outlet,
 } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+
 
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Detail from './pages/Detail'
 import Favorites from './pages/Favorites'
 import Register from './pages/Register'
-import Layout from './components/Layout'
+import Layout from './containers/Layout'
 
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function Routes() {
+export default function RoutesComponent() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/register" component={Register} />
-        <Route>
-          <Layout>
-            <Switch>
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/favorites" component={Favorites} />
-              <Route exact path="/pokemon/:name" component={Detail} />
-            </Switch>
-          </Layout>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<Login />} />
+        <Route element={<Layout> <Outlet /> </Layout >}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/pokemon/:name" element={<Detail />} />
         </Route>
-      </Switch>
+      </Routes>
       <ToastContainer
         position="top-right"
         autoClose={2500}
