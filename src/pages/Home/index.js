@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
-import { Container, Button } from '@mui/material'
+import { Container } from '@mui/material'
+import ButtonComponent from '../../components/Button'
 import PokeCard from '../../components/PokeCard'
 import LoaderComponent from '../../components/Loader'
 
@@ -51,18 +52,16 @@ function Home() {
         {user && handleListado()}
       </section>
       <div className="home__nav-buttons">
-        <Button
+        <ButtonComponent
           name="back"
           onClick={({ target }) => handleClick(target)}
-          variant="contained">
-          {'< Back'}
-        </Button>
-        <Button
+          variant="contained"
+          text="< Back" />
+        <ButtonComponent
           name="next"
           onClick={({ target }) => handleClick(target)}
-          variant="contained">
-          {'Next >'}
-        </Button>
+          variant="contained"
+          text="Next >" />
       </div>
     </Container>
   )
