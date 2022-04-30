@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react'
-import { useAuthState } from "react-firebase-hooks/auth"
-import { useHistory } from "react-router"
-import { auth } from "../services/firebase"
+import { useEffect } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { useNavigate } from 'react-router-dom'
+
+import { auth } from '../services/firebase'
 
 const IsLogged = () => {
-  const [user, loading, error] = useAuthState(auth)
-  const history = useHistory()
+  const [user, loading] = useAuthState(auth)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (loading) return
-    if (!user) return history.replace("/")
+    if (!user) navigate('/')
   }, [user, loading])
 
   return [user, loading]

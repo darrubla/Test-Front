@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-export const notify = (type, text, id) => {
+const notify = (type, text, id) => {
   const toastType = {
     success: 'success',
     error: 'error',
@@ -10,3 +10,5 @@ export const notify = (type, text, id) => {
     toastId: id
   })
 }
+
+export default notify

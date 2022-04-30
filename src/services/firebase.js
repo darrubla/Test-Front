@@ -1,24 +1,26 @@
+/* eslint-disable camelcase */
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
-import { notify } from '../utils/notifyToast'
-import { doc, setDoc, arrayUnion, arrayRemove, updateDoc } from "firebase/firestore";
-import {
-  firebaseApiKey,
-  firebaseAuthDomain,
-  firebaseProjectId,
-  firebaseStorageBucket,
-  firebaseMsgSenderId,
-  firebaseAppId,
-} from '../utils/environments'
+import { doc, setDoc, arrayUnion, arrayRemove, updateDoc } from 'firebase/firestore'
+import notify from '../utils/notifyToast'
+
+const {
+  REACT_APP_FIREBASE_API_KEY,
+  REACT_APP_AUTH_DOMAIN,
+  REACT_APP_PROJECT_ID,
+  REACT_APP_STORAGE_BUCKET,
+  REACT_APP_MESSAGING_SENDER_ID,
+  REACT_APP_FIREBASE_APP_Id,
+} = process.env
 
 const firebaseConfig = {
-  apiKey: firebaseApiKey,
-  authDomain: firebaseAuthDomain,
-  projectId: firebaseProjectId,
-  storageBucket: firebaseStorageBucket,
-  messagingSenderId: firebaseMsgSenderId,
-  appId: firebaseAppId
+  apiKey: REACT_APP_FIREBASE_API_KEY,
+  authDomain: REACT_APP_AUTH_DOMAIN,
+  projectId: REACT_APP_PROJECT_ID,
+  storageBucket: REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: REACT_APP_MESSAGING_SENDER_ID,
+  appId: REACT_APP_FIREBASE_APP_Id
 }
 
 const app = firebase.initializeApp(firebaseConfig)
@@ -30,16 +32,16 @@ const googleProvider = new firebase.auth.GoogleAuthProvider()
 const signInWithGoogle = async () => {
   try {
     const res = await auth.signInWithPopup(googleProvider)
-    const user = res.user
+    const { user } = res
     const query = await db
-      .collection("users")
-      .where("uid", "==", user.uid)
+      .collection('users')
+      .where('uid', '==', user.uid)
       .get()
     if (query.docs.length === 0) {
-      await db.collection("users").add({
+      await db.collection('users').add({
         uid: user.uid,
         name: user.displayName,
-        authProvider: "google",
+        authProvider: 'google',
         email: user.email,
       })
     }
@@ -51,6 +53,7 @@ const signInWithGoogle = async () => {
 const signInWithEmailAndPassword = async (email, password) => {
   try {
     const res = await auth.signInWithEmailAndPassword(email, password)
+    if (0) console.log(res)
   } catch (err) {
     console.error(err)
     notify('error', '!Upss el usuario no existe en nuestra base, por favor revisa tus datos!', 'error_auth')
@@ -60,11 +63,11 @@ const signInWithEmailAndPassword = async (email, password) => {
 const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password)
-    const user = res.user
-    await db.collection("users").add({
+    const { user } = res
+    await db.collection('users').add({
       uid: user.uid,
       name,
-      authProvider: "local",
+      authProvider: 'local',
       email,
     })
   } catch (err) {
@@ -75,16 +78,17 @@ const registerWithEmailAndPassword = async (name, email, password) => {
 
 const addFavorites = async (id, email) => {
   try {
-    const docRef = await setDoc(doc(db, "usuarios", email), {
+    const docRef = await setDoc(doc(db, 'usuarios', email), {
       favorites: [id]
     });
+    if (0) console.log(docRef)
   } catch (e) {
     notify('error', '!Upss ha ocurrido un error, vuelve a intentarlo más tarde!', 'error_adding_favorite')
   }
 }
 
 const updateFavorites = async (id, email) => {
-  const document = doc(db, "usuarios", email);
+  const document = doc(db, 'usuarios', email);
   try {
     await updateDoc(document, {
       favorites: arrayUnion(id)
@@ -95,7 +99,7 @@ const updateFavorites = async (id, email) => {
 };
 
 const removeFavorites = async (id, email) => {
-  const document = doc(db, "usuarios", email);
+  const document = doc(db, 'usuarios', email);
   try {
     await updateDoc(document, {
       favorites: arrayRemove(id)
