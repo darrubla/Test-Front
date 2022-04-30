@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
+import ButtonComponent from '../../components/Button'
+
 import { auth, signInWithEmailAndPassword, signInWithGoogle } from '../../services/firebase'
 import notify from '../../utils/notifyToast'
 
@@ -49,16 +51,17 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button
+        <ButtonComponent
           type="button"
           className="login__btn"
-          onClick={() => handleSubmit()}
-        >
-          Login
-        </button>
-        <button type="button" className="login__btn login__google" onClick={signInWithGoogle}>
-          Login with Google
-        </button>
+          action={() => handleSubmit()}
+          text="Login" />
+        <ButtonComponent
+          secondary
+          type="button"
+          className="login__btn login__google"
+          action={signInWithGoogle}
+          text="Login with Google" />
         <span>
           Don&apos;t have an account? <Link to="/register">Register</Link> now.
         </span>
