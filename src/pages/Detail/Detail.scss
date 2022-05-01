@@ -1,3 +1,5 @@
+@import '../../generals.scss';
+
 .detail-card {
   &.container {
     height: 400px;
@@ -23,9 +25,9 @@
     border-bottom: 1px solid gray;
 
     h3 {
-      color: black;
-      font-weight: 900;
       margin: 16px 0 16px 4px;
+      font-weight: $fw-bold;
+      @extend .fn-h2;
     }
 
     span {
@@ -64,8 +66,7 @@
       }
 
       h5 {
-        font-size: 18px;
-        font-weight: bold;
+        @extend .fn-h4-regular;
       }
     }
   }
@@ -79,10 +80,10 @@
   justify-content: space-evenly !important;
 }
 
-@media (max-width: 425px) {
+@media (max-width: $smaller-breakpoint) {
   .detail-card {
     &.container {
-      height: 500px;
+      height: 600px;
       margin: 10vh auto;
     }
 
@@ -98,14 +99,18 @@
         margin: 8px;
       }
 
-      section {
-        label {}
-      }
-
       h5 {
         font-size: 15px;
         font-weight: bold;
       }
+    }
+  }
+}
+
+@media (max-width: $smallest-breakpoint) {
+  .detail-card {
+    &.container {
+      height: 500px;
     }
   }
 }

@@ -53,11 +53,13 @@ function Login() {
         />
         <ButtonComponent
           type="button"
+          id="Login-btn"
           className="login__btn"
           action={() => handleSubmit()}
           text="Login" />
         <ButtonComponent
           secondary
+          id="Login-google-btn"
           type="button"
           className="login__btn login__google"
           action={signInWithGoogle}

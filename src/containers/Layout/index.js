@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import PropTypes from 'prop-types'
 
 import { BottomNavigation, BottomNavigationAction } from '@mui/material'
 import Icon from '@material-ui/core/Icon'
+import Header from '../../components/Header'
 
-import { logout } from '../../services/firebase'
+import { logout, auth } from '../../services/firebase'
 
 import './Layout.scss'
 
@@ -17,6 +19,7 @@ const url = [
 export default function Layout({ children }) {
   const navigate = useNavigate()
   const location = useLocation()
+  const [user] = useAuthState(auth)
   const [value, setValue] = useState(url.indexOf(location.pathname))
 
   useEffect(() => {
@@ -30,6 +33,7 @@ export default function Layout({ children }) {
 
   return (
     <section className="layout">
+      <Header name={user?.displayName} />
       {children}
       <BottomNavigation
         showLabels

@@ -47,6 +47,7 @@ export default function Detail() {
 
   const handlePokeInfo = () => {
     if (pokemon) {
+      console.log(pokemon)
       const { name, id } = pokemon
       return (
         <Container>
@@ -68,12 +69,12 @@ export default function Detail() {
                 </div>
                 {entry &&
                   <h5>
-                    {entry.flavor_text_entries[10].flavor_text}
+                    <strong>Description: </strong>{entry.flavor_text_entries[10].flavor_text}
                   </h5>
                 }
                 {entry &&
                   <h5>
-                    Growth rate: {entry.growth_rate.name}
+                    <strong>Growth rate: </strong> {entry.growth_rate.name}
                   </h5>
                 }
               </section>

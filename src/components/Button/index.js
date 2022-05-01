@@ -14,10 +14,12 @@ function ButtonComponent(props) {
     secondary,
     action,
     children,
+    name,
   } = props
   return (
     <Button
       type="button"
+      name={name}
       className={`Button ${className}-Button`}
       disabled={disabled}
       id={id}
@@ -39,6 +41,7 @@ ButtonComponent.propTypes = {
   secondary: PropTypes.bool,
   action: PropTypes.func,
   children: PropTypes.node,
+  name: PropTypes.string,
 }
 
 ButtonComponent.defaultProps = {
@@ -48,6 +51,7 @@ ButtonComponent.defaultProps = {
   secondary: false,
   action: () => {},
   children: undefined,
+  name: ''
 }
 
 export default ButtonComponent

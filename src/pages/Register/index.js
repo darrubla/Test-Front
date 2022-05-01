@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
+import ButtonComponent from '../../components/Button'
+
 import { auth, registerWithEmailAndPassword } from '../../services/firebase'
 import notify from '../../utils/notifyToast'
 
@@ -59,13 +61,13 @@ function Register() {
           onChange={({ target }) => setPassword(target.value)}
           placeholder="Password"
         />
-        <button
+        <ButtonComponent
+          id="register-btn"
           type="button"
           className="register__btn"
-          onClick={() => handleSubmit()}
-        >
-          Register
-        </button>
+          action={() => handleSubmit()}
+          text="Register"
+        />
         <span>
           Already have an account? <Link to="/">Login</Link> now.
         </span>
