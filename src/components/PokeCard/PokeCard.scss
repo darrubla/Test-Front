@@ -1,6 +1,9 @@
+@import '../../generals.scss';
+
 .poke-card {
   &.container {
-    height: 210px;
+    width: 220px;
+    height: 230px;
     display: grid;
     grid-template-rows: 1fr 6fr;
     background-color: papayawhip;
@@ -46,10 +49,12 @@
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: $smaller-breakpoint) {
   .poke-card {
     &.container {
-      height: 310px;
+      margin: 0 auto $spacing-m;
+      height: 250px;
+      width: 80%;
     }
 
     &__body {

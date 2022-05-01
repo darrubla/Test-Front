@@ -54,12 +54,14 @@ function Home() {
       <div className="home__nav-buttons">
         <ButtonComponent
           name="back"
-          onClick={({ target }) => handleClick(target)}
+          id="Back-btn"
+          action={({ target }) => handleClick(target)}
           variant="contained"
           text="< Back" />
         <ButtonComponent
           name="next"
-          onClick={({ target }) => handleClick(target)}
+          id="Next-btn"
+          action={({ target }) => handleClick(target)}
           variant="contained"
           text="Next >" />
       </div>
