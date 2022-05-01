@@ -29,6 +29,7 @@
     "react/forbid-prop-types": "off",
     "react/function-component-definition": "off",
     "jsx-a11y/label-has-associated-control": "off",
+    "react/no-unused-prop-types": "off",
     "prettier/prettier": [
       "warn",
       {

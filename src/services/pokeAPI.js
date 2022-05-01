@@ -1,7 +1,10 @@
 import axios from 'axios'
 
-export const getListado = (offset = 0) => {
-  const url = `https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${offset}`
+const urlBase = 'https://pokeapi.co/api/v2/pokemon'
+
+export const getListado = (offset = 0, limit = 20) => {
+  const url = `${urlBase}/?limit=${limit}&offset=${offset}`
+
   return axios({
     method: 'GET',
     url
@@ -14,13 +17,13 @@ export const getPokeInfo = (url) => axios({
 })
 
 export const getUrl = (id) => {
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`
+  const url = `${urlBase}/${id}`
   return url
 }
 
 
 export const getPokeEntry = (id) => {
-  const url = `https://pokeapi.co/api/v2/pokemon-species/${id}/`
+  const url = `${urlBase}-species/${id}/`
   return axios({
     method: 'GET',
     url
