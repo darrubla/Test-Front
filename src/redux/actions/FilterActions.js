@@ -7,6 +7,7 @@ import {
   FILTER_STARTED,
   FILTER_SUCCESS,
   FILTER_FAILED,
+  CLEAR_FILTER,
 } from '../constants'
 
 export const FilterPokemonStarted = () => ({
@@ -23,7 +24,7 @@ export const FilterPokemonFailed = (payload) => ({
   payload,
 })
 
-export const ClearFilter = () => ({ type: FILTER_STARTED })
+export const ClearFilter = () => ({ type: CLEAR_FILTER })
 
 const FilterPokemon = (url) => async (dispatch) => {
   dispatch(FilterPokemonStarted())

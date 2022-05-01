@@ -3,11 +3,11 @@ import {
   FILTER_STARTED,
   FILTER_SUCCESS,
   FILTER_FAILED,
+  CLEAR_FILTER,
 } from '../constants'
 
 const initialStateFilter = {
   filterPokemon: {},
-  filterPokemonStarted: false,
   filterPokemonSuccess: false,
   filterPokemonFailed: false,
   filterPokemonIsLoading: false,
@@ -44,6 +44,12 @@ const FilterPokemonReducer = (state = initialState, action) => {
         filterPokemonFailed: true,
         filterPokemonIsLoading: false,
         filterPokemonError: payload,
+      }
+    }
+    case CLEAR_FILTER: {
+      return {
+        ...state,
+        ...initialStateFilter,
       }
     }
     default:
