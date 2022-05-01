@@ -6,3 +6,4 @@ build
 package-lock.json
 *.config.js
 .vscode
+src/service*.js
