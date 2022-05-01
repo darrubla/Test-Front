@@ -1,3 +1,5 @@
+@import '../../generals.scss';
+
 .layout {
   &>.MuiContainer-root {
     margin-bottom: 80px;
@@ -19,6 +21,14 @@
 
     .MuiButtonBase-root {
       color: rgba(78, 0, 0, 0.9)
+    }
+  }
+}
+
+@media (max-width: $smaller-breakpoint) {
+  .layout {
+    &>.MuiContainer-root {
+      margin-top: 130px;
     }
   }
 }

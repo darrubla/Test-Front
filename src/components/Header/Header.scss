@@ -34,3 +34,20 @@ header {
     }
   }
 }
+
+@media (max-width: $smaller-breakpoint) {
+  header {
+    height: 6rem;
+
+    .header {
+      &__content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+        .MuiAutocomplete-root {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { Container } from '@mui/material'
 import ButtonComponent from '../../components/Button'
@@ -13,10 +15,11 @@ import IsLogged from '../../utils/IsLogged'
 
 import './Home.scss'
 
-function Home() {
+function Home({ filterPokemon, filterPokemonIsLoading }) {
   const [user] = useAuthState(auth)
   const [listado, setListado] = useState(null)
   const [offSet, setOffset] = useState(null)
+
   IsLogged()
 
   useEffect(() => {
@@ -27,6 +30,17 @@ function Home() {
         notify('error', '¡Upps, parece que la base de datos de la pokedex está en actualización, prueba más tarde!', 'getListadoError')
       })
   }, [offSet])
+
+  useEffect(() => {
+    if (Object.values(filterPokemon)?.length >= 1) {
+      const { name } = filterPokemon
+      setOffset(0)
+      setListado([{
+        name,
+        url: `https://pokeapi.co/api/v2/pokemon/${name}`
+      }])
+    }
+  }, [filterPokemon])
 
   const handleListado = () => {
     if (listado && user) {
@@ -47,25 +61,40 @@ function Home() {
 
   return (
     <Container>
-      <LoaderComponent />
+      <LoaderComponent show={filterPokemonIsLoading} />
       <section className="home">
         {user && handleListado()}
       </section>
-      <div className="home__nav-buttons">
-        <ButtonComponent
-          name="back"
-          id="Back-btn"
-          action={({ target }) => handleClick(target)}
-          variant="contained"
-          text="< Back" />
-        <ButtonComponent
-          name="next"
-          id="Next-btn"
-          action={({ target }) => handleClick(target)}
-          variant="contained"
-          text="Next >" />
-      </div>
+      {listado?.length >= 20 && (
+        <div className="home__nav-buttons">
+          <ButtonComponent
+            name="back"
+            id="Back-btn"
+            action={({ target }) => handleClick(target)}
+            variant="contained"
+            text="< Back" />
+          <ButtonComponent
+            name="next"
+            id="Next-btn"
+            action={({ target }) => handleClick(target)}
+            variant="contained"
+            text="Next >" />
+        </div>
+      )}
     </Container>
   )
 }
-export default Home
+
+Home.propTypes = {
+  filterPokemon: PropTypes.object.isRequired,
+  filterPokemonIsLoading: PropTypes.bool.isRequired,
+}
+
+function mapStateToProps({ Filter: { filterPokemon, filterPokemonIsLoading } }) {
+  return {
+    filterPokemon,
+    filterPokemonIsLoading
+  }
+}
+
+export default connect(mapStateToProps)(Home)

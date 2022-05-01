@@ -47,7 +47,6 @@ export default function Detail() {
 
   const handlePokeInfo = () => {
     if (pokemon) {
-      console.log(pokemon)
       const { name, id } = pokemon
       return (
         <Container>
