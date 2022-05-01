@@ -1,19 +1,28 @@
-import { useEffect } from 'react'
+import React from 'react'
+import { Navigate } from 'react-router-dom'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import { auth } from '../services/firebase'
 
-const IsLogged = () => {
-  const [user, loading] = useAuthState(auth)
-  const navigate = useNavigate()
+function IsLogged(props) {
+  const { children } = props
+  const [user] = useAuthState(auth)
+  console.log(children, props)
+  if (!user) {
+    console.log(user, children)
+    return <Navigate to="/" />
+  }
 
-  useEffect(() => {
-    if (loading) return
-    if (!user) navigate('/')
-  }, [user, loading])
-
-  return [user, loading]
+  return children
 }
+
+IsLogged.propTypes = {
+  children: PropTypes.element,
+}
+IsLogged.defaultProps = {
+  children: <div>Element</div>,
+}
+
 
 export default IsLogged

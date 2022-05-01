@@ -1,4 +1,10 @@
-// ----------HEADER SEARCH-------------- //
+// ----------FILTER SEARCH-------------- //
 export const FILTER_STARTED = 'FILTER_STARTED'
 export const FILTER_SUCCESS = 'FILTER_SUCCESS'
 export const FILTER_FAILED = 'FILTER_FAILED'
+export const CLEAR_FILTER = 'CLEAR_FILTER'
+
+// ---------- GET POKEMON LIST-------------- //
+export const GET_POKEMON_LIST_STARTED = 'GET_POKEMON_LIST_STARTED'
+export const GET_POKEMON_LIST_SUCCESS = 'GET_POKEMON_LIST_SUCCESS'
+export const GET_POKEMON_LIST_FAILED = 'GET_POKEMON_LIST_FAILED'

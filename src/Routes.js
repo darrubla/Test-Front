@@ -16,19 +16,32 @@ import Register from './pages/Register'
 import Layout from './containers/Layout'
 
 import 'react-toastify/dist/ReactToastify.css';
+import IsLogged from './utils/IsLogged';
 
 export default function RoutesComponent() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Unprotected Routes */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="*" element={<Login />} />
-        <Route element={<Layout> <Outlet /> </Layout >}>
+
+        {/* Protected Routes */}
+        <Route element={
+          <IsLogged >
+            <Layout>
+              <Outlet />
+            </Layout >
+          </IsLogged>
+        }>
           <Route path="/home" element={<Home />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/pokemon/:name" element={<Detail />} />
         </Route>
+
+        {/* Not Found Route */}
+        <Route path="*" element={<Login />} />
+
       </Routes>
       <ToastContainer
         position="top-right"

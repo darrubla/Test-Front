@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { Container } from '@mui/material'
@@ -8,28 +8,29 @@ import ButtonComponent from '../../components/Button'
 import PokeCard from '../../components/PokeCard'
 import LoaderComponent from '../../components/Loader'
 
-import { getListado } from '../../services/pokeAPI'
+import GetPokemonList from '../../redux/actions/HomeActtions'
 import { auth } from '../../services/firebase'
-import notify from '../../utils/notifyToast'
-import IsLogged from '../../utils/IsLogged'
 
 import './Home.scss'
 
-function Home({ filterPokemon, filterPokemonIsLoading }) {
+function Home({ filterPokemon, isloading, pokemonList }) {
+
+  const dispatch = useDispatch()
   const [user] = useAuthState(auth)
   const [listado, setListado] = useState(null)
-  const [offSet, setOffset] = useState(null)
-
-  IsLogged()
+  const [offSet, setOffset] = useState(0)
 
   useEffect(() => {
-    const lista = getListado(offSet)
-    lista
-      .then(res => setListado(res.data.results))
-      .catch(() => {
-        notify('error', '¡Upps, parece que la base de datos de la pokedex está en actualización, prueba más tarde!', 'getListadoError')
-      })
+    if (!Object.values(filterPokemon)?.length >= 1) {
+      dispatch(GetPokemonList(offSet))
+    }
   }, [offSet])
+
+  useEffect(() => {
+    if (pokemonList?.length >= 1) {
+      setListado(pokemonList)
+    }
+  }, [pokemonList])
 
   useEffect(() => {
     if (Object.values(filterPokemon)?.length >= 1) {
@@ -39,6 +40,8 @@ function Home({ filterPokemon, filterPokemonIsLoading }) {
         name,
         url: `https://pokeapi.co/api/v2/pokemon/${name}`
       }])
+    } else {
+      dispatch(GetPokemonList(offSet))
     }
   }, [filterPokemon])
 
@@ -56,12 +59,12 @@ function Home({ filterPokemon, filterPokemonIsLoading }) {
 
   const handleClick = ({ name }) => {
     if (name === 'next') setOffset(offSet + 20)
-    if (name === 'back') setOffset(offSet - 20)
+    if (name === 'back' && offSet >= 20) setOffset(offSet - 20)
   }
 
   return (
     <Container>
-      <LoaderComponent show={filterPokemonIsLoading} />
+      <LoaderComponent show={isloading} />
       <section className="home">
         {user && handleListado()}
       </section>
@@ -87,13 +90,18 @@ function Home({ filterPokemon, filterPokemonIsLoading }) {
 
 Home.propTypes = {
   filterPokemon: PropTypes.object.isRequired,
-  filterPokemonIsLoading: PropTypes.bool.isRequired,
+  isloading: PropTypes.bool.isRequired,
+  pokemonList: PropTypes.array.isRequired,
 }
 
-function mapStateToProps({ Filter: { filterPokemon, filterPokemonIsLoading } }) {
+function mapStateToProps({
+  Filter: { filterPokemon, filterPokemonIsLoading },
+  Home: { pokemonList, pokemonListIsLoading }
+}) {
   return {
     filterPokemon,
-    filterPokemonIsLoading
+    isloading: pokemonListIsLoading || filterPokemonIsLoading,
+    pokemonList,
   }
 }
 
