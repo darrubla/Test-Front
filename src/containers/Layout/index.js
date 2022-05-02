@@ -10,7 +10,6 @@ import Header from '../../components/Header'
 import { logout, auth } from '../../services/firebase'
 
 import './Layout.scss'
-import IsLogged from '../../utils/IsLogged'
 
 const url = [
   '/home',
@@ -37,23 +36,21 @@ export default function Layout({ children }) {
   }, [location])
 
   return (
-    <IsLogged>
-      <section className="layout">
-        <Header name={user?.displayName} />
-        {children}
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue)
-          }}
-        >
-          <BottomNavigationAction label="Home" icon={<Icon>home</Icon>} />
-          <BottomNavigationAction label="Favorites" icon={<Icon>favorite</Icon>} />
-          <BottomNavigationAction label="Logout" icon={<Icon>logout</Icon>} />
-        </BottomNavigation>
-      </section>
-    </IsLogged>
+    <section className="layout">
+      <Header name={user?.displayName} />
+      {children}
+      <BottomNavigation
+        showLabels
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue)
+        }}
+      >
+        <BottomNavigationAction label="Home" icon={<Icon>home</Icon>} />
+        <BottomNavigationAction label="Favorites" icon={<Icon>favorite</Icon>} />
+        <BottomNavigationAction label="Logout" icon={<Icon>logout</Icon>} />
+      </BottomNavigation>
+    </section>
   )
 }
 

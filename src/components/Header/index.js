@@ -80,7 +80,6 @@ function Header({ name, filterPokemon }) {
 Header.propTypes = {
   name: PropTypes.string.isRequired,
   filterPokemon: PropTypes.object.isRequired,
-  isloading: PropTypes.bool.isRequired,
 }
 
 function mapStateToProps({

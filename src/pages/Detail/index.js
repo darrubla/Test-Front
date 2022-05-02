@@ -17,7 +17,7 @@ function Detail({ pokemonDetails, isloading, pokemonEntry }) {
   const { pathname } = location
   const [pokemon, setPokemon] = useState(null)
   const [entry, setEntry] = useState(null)
-  const [favorite, setFavorite] = useState(location.state?.isFavorite)
+  const favorite = location.state?.isFavorite
 
   useEffect(() => {
     if (!pokemon) {
@@ -47,11 +47,6 @@ function Detail({ pokemonDetails, isloading, pokemonEntry }) {
     pokemon.types.map((type) => <label key={`${type.type.name}`}>{type.type.name}</label>)
   )
 
-  const handleClick = (e) => {
-    e.preventDefault()
-    if (0) setFavorite(!favorite)
-  }
-
   const handlePokeInfo = () => {
     if (pokemon) {
       const { name, id } = pokemon
@@ -63,7 +58,9 @@ function Detail({ pokemonDetails, isloading, pokemonEntry }) {
               <h3>#{id} - {name}</h3>
               <Button
                 name={id}
-                onClick={(e) => { handleClick(e) }}
+                action={() => {}}
+                id="favorite"
+                disabled
               >
                 <Icon name={id}>{favorite ? 'favorite' : 'favorite_border'}</Icon>
               </Button>            </div>
