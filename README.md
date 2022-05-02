@@ -1,4 +1,4 @@
-**# test-front**
+# **# test-front**
 
 >Puedes observar las tarjetas de varios pokemon y almacenar tus favoritos. Asegúrate de ir y observar más detalles seleccionando cada tarjeta. No olvides que es una PWA por lo tanto, puedes descargar la app desde el navegador para una experiencia más cómoda 😀.
 
@@ -21,13 +21,19 @@
 
 # Recursos
 + ⚛️ React
-+ 💫 Redux
-+ 💫 Redux-persistor
-+ 🚀 React-router
-+ 🎨 Material UI
-+ 🧮 Firebase / Firestore
++ 💫 Redux -> [https://es.redux.js.org/]
++ 💫 Redux-persistor -> [https://github.com/rt2zz/redux-persist]
++ 🚀 React-router -> [https://reactrouter.com/docs/en/v6]
++ 🎨 Material UI -> [https://mui.com/material-ui/getting-started/installation/]
++ 🧮 Firebase / Firestore -> [https://firebase.google.com/docs]
++ 🤖 Vercel -> [https://vercel.com/docs]
 
-
+## Decisiones Técnicas
+- Se Utilizó Redux persistor con la idea de persistir la información y hacer manejo de esta desde el localStorage (No necesario, solo se quizo mostrar el manejo)
+- Material UI se implementó por la comodidad y familiaridad con la misma, además que es la misma que se utiliza en la empresa que diseñó la prueba
+- Se realizó el despliegue en Vercel dado que es muy fácil de manipular y monitorear, además de familiaridad con la herramienta.
+- Se trabajó con SASS en los estilos puesto que nos permite una buena visualización de las hojas de estilo, y por su buen acoplamiento con la nomenclatura BEM
+- Se implementó el manejo de Firebase y Firestore como herramientas de autenticación y almacenamiento ya que son herramientas que nos facilitan el tener que pensar en una solución de Backend.
 
 # Getting Started with Create React App
 
