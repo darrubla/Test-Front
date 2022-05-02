@@ -1,4 +1,4 @@
-# **# test-front**
+# **test-front**
 
 >Puedes observar las tarjetas de varios pokemon y almacenar tus favoritos. Asegúrate de ir y observar más detalles seleccionando cada tarjeta. No olvides que es una PWA por lo tanto, puedes descargar la app desde el navegador para una experiencia más cómoda 😀.
 
@@ -21,12 +21,12 @@
 
 # Recursos
 + ⚛️ React
-+ 💫 Redux -> [https://es.redux.js.org/]
-+ 💫 Redux-persistor -> [https://github.com/rt2zz/redux-persist]
-+ 🚀 React-router -> [https://reactrouter.com/docs/en/v6]
-+ 🎨 Material UI -> [https://mui.com/material-ui/getting-started/installation/]
-+ 🧮 Firebase / Firestore -> [https://firebase.google.com/docs]
-+ 🤖 Vercel -> [https://vercel.com/docs]
++ 💫 Redux -> https://es.redux.js.org/
++ 💫 Redux-persistor -> ttps://github.com/rt2zz/redux-persist
++ 🚀 React-router -> https://reactrouter.com/docs/en/v6
++ 🎨 Material UI -> https://mui.com/material-ui/getting-started/installation/
++ 🧮 Firebase / Firestore -> https://firebase.google.com/docs
++ 🤖 Vercel -> https://vercel.com/docs
 
 ## Decisiones Técnicas
 - Se Utilizó Redux persistor con la idea de persistir la información y hacer manejo de esta desde el localStorage (No necesario, solo se quizo mostrar el manejo)
