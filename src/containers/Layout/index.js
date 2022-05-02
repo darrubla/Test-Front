@@ -32,6 +32,10 @@ export default function Layout({ children }) {
     }
   }, [value]);
 
+  useEffect(() => {
+    setValue(url.indexOf(location.pathname))
+  }, [location])
+
   return (
     <IsLogged>
       <section className="layout">

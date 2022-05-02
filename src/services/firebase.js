@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+/* eslint-disable no-unused-vars */
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
@@ -53,10 +54,9 @@ const signInWithGoogle = async () => {
 const signInWithEmailAndPassword = async (email, password) => {
   try {
     const res = await auth.signInWithEmailAndPassword(email, password)
-    if (0) console.log(res)
   } catch (err) {
     console.error(err)
-    notify('error', '!Upss el usuario no existe en nuestra base, por favor revisa tus datos!', 'error_auth')
+    notify('error', '!Upss el usuario no se ha podido conectar, por favor revisa tus datos!', 'error_auth')
   }
 }
 
@@ -81,7 +81,6 @@ const addFavorites = async (id, email) => {
     const docRef = await setDoc(doc(db, 'usuarios', email), {
       favorites: [id]
     });
-    if (0) console.log(docRef)
   } catch (e) {
     notify('error', '!Upss ha ocurrido un error, vuelve a intentarlo más tarde!', 'error_adding_favorite')
   }
