@@ -20,12 +20,3 @@ export const getUrl = (id) => {
   const url = `${urlBase}/${id}`
   return url
 }
-
-
-export const getPokeEntry = (id) => {
-  const url = `${urlBase}-species/${id}/`
-  return axios({
-    method: 'GET',
-    url
-  })
-}

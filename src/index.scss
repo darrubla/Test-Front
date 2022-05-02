@@ -7,7 +7,28 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url("https://gumqs8el2m.execute-api.us-east-1.amazonaws.com/production/?filename=https://houm.com/static/images/pink-shape.png&width=1920&height=undefined&quality=undefined&action=contain") top left / 1400px 1200px repeat;
+
+  & .background__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 0;
+    border: none;
+    margin: auto;
+    display: block;
+    width: 0;
+    height: 0;
+    opacity: 0.2;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    z-index: -100;
+  }
 }
 
 code {

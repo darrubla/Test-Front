@@ -1,35 +1,45 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useDispatch, connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import Icon from '@material-ui/core/Icon'
 import { Container, Button } from '@mui/material'
 import LoaderComponent from '../../components/Loader'
 
-import { getPokeEntry, getPokeInfo } from '../../services/pokeAPI'
+import GetPokemonDetails, { GetPokemonEntry } from '../../redux/actions/DetailActions'
 
 import './Detail.scss'
 
-export default function Detail() {
+function Detail({ pokemonDetails, isloading, pokemonEntry }) {
   const location = useLocation()
+  const dispatch = useDispatch()
   const { pathname } = location
   const [pokemon, setPokemon] = useState(null)
   const [entry, setEntry] = useState(null)
   const [favorite, setFavorite] = useState(location.state?.isFavorite)
-  const urlBase = 'https://pokeapi.co/api/v2'
 
   useEffect(() => {
     if (!pokemon) {
-      const info = getPokeInfo(`${urlBase}${pathname}`)
-      info
-        .then(res => setPokemon(res.data))
+      dispatch(GetPokemonDetails(pathname))
     }
   }, [])
 
   useEffect(() => {
+    if (Object.values(pokemonDetails).length >= 1) {
+      setPokemon(pokemonDetails)
+    }
+  }, [pokemonDetails])
+
+  useEffect(() => {
+    if (Object.values(pokemonEntry).length >= 1) {
+      setEntry(pokemonEntry)
+    }
+  }, [pokemonEntry])
+
+  useEffect(() => {
     if (pokemon && !entry) {
-      const info = getPokeEntry(pokemon.id)
-      info
-        .then(res => setEntry(res.data))
+      dispatch(GetPokemonEntry(pokemon.id))
     }
   }, [pokemon])
 
@@ -47,7 +57,7 @@ export default function Detail() {
       const { name, id } = pokemon
       return (
         <Container>
-          <LoaderComponent />
+          <LoaderComponent show={isloading} />
           <section className="detail-card container" to={`/${name}`}>
             <div className="detail-card__title">
               <h3>#{id} - {name}</h3>
@@ -83,3 +93,21 @@ export default function Detail() {
   }
   return handlePokeInfo()
 }
+
+Detail.propTypes = {
+  pokemonDetails: PropTypes.object.isRequired,
+  isloading: PropTypes.bool.isRequired,
+  pokemonEntry: PropTypes.object.isRequired,
+}
+
+function mapStateToProps({
+  Detail: { pokemonDetails, pokemonDetailsIsLoading, pokemonEntry, PokemonEntryIsLoading }
+}) {
+  return {
+    pokemonDetails,
+    pokemonEntry,
+    isloading: pokemonDetailsIsLoading || PokemonEntryIsLoading,
+  }
+}
+
+export default connect(mapStateToProps)(Detail)
