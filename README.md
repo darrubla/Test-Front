@@ -1,4 +1,4 @@
-**# test-frontend**
+**# test-front**
 
 >Puedes observar las tarjetas de varios pokemon y almacenar tus favoritos. Asegúrate de ir y observar más detalles seleccionando cada tarjeta. No olvides que es una PWA por lo tanto, puedes descargar la app desde el navegador para una experiencia más cómoda 😀.
 
@@ -6,6 +6,10 @@
 
 ## **Autenticación**
 - Controlado gracias a Firebase Auth, disfruta de acceder por correo y contraseña o ingresa directamente con tu usuario de Google.
+
+## **Header**
+- **Name:** arriba a la izquierda aparecerá el nombre del usuario loggeado
+- **Filter** lateral derecho (header inferior en mobile) filtro de Pokemon para encontrar a ese Pokemon que tanto añoras.
 
 ## **Botones Navegación**
 - **Home:** Página por defecto de la aplicación y al presionarla puedes volver al listado de todos los pokemon, siempre hay más que puedes agregar a tus favoritos 🤗.
@@ -17,6 +21,8 @@
 
 # Recursos
 + ⚛️ React
++ 💫 Redux
++ 💫 Redux-persistor
 + 🚀 React-router
 + 🎨 Material UI
 + 🧮 Firebase / Firestore
