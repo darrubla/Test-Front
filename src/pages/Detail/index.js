@@ -6,7 +6,6 @@ import { Container, Button } from '@mui/material'
 import LoaderComponent from '../../components/Loader'
 
 import { getPokeEntry, getPokeInfo } from '../../services/pokeAPI'
-import IsLogged from '../../utils/IsLogged'
 
 import './Detail.scss'
 
@@ -17,8 +16,6 @@ export default function Detail() {
   const [entry, setEntry] = useState(null)
   const [favorite, setFavorite] = useState(location.state?.isFavorite)
   const urlBase = 'https://pokeapi.co/api/v2'
-
-  IsLogged()
 
   useEffect(() => {
     if (!pokemon) {

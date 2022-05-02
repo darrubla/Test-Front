@@ -8,9 +8,7 @@ import { auth } from '../services/firebase'
 function IsLogged(props) {
   const { children } = props
   const [user] = useAuthState(auth)
-  console.log(children, props)
   if (!user) {
-    console.log(user, children)
     return <Navigate to="/" />
   }
 

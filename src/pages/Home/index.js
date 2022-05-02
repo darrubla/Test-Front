@@ -20,6 +20,15 @@ function Home({ filterPokemon, isloading, pokemonList }) {
   const [listado, setListado] = useState(null)
   const [offSet, setOffset] = useState(0)
 
+  const setFilteredPokemon = () => {
+    const { name } = filterPokemon
+    setOffset(0)
+    setListado([{
+      name,
+      url: `https://pokeapi.co/api/v2/pokemon/${name}`
+    }])
+  }
+
   useEffect(() => {
     if (!Object.values(filterPokemon)?.length >= 1) {
       dispatch(GetPokemonList(offSet))
@@ -27,19 +36,14 @@ function Home({ filterPokemon, isloading, pokemonList }) {
   }, [offSet])
 
   useEffect(() => {
-    if (pokemonList?.length >= 1) {
+    if (pokemonList?.length >= 1 && !Object.values(filterPokemon)?.length >= 1) {
       setListado(pokemonList)
     }
   }, [pokemonList])
 
   useEffect(() => {
     if (Object.values(filterPokemon)?.length >= 1) {
-      const { name } = filterPokemon
-      setOffset(0)
-      setListado([{
-        name,
-        url: `https://pokeapi.co/api/v2/pokemon/${name}`
-      }])
+      setFilteredPokemon()
     } else {
       dispatch(GetPokemonList(offSet))
     }
