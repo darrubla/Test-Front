@@ -22,7 +22,7 @@
 # Recursos
 + ⚛️ React
 + 💫 Redux -> https://es.redux.js.org/
-+ 💫 Redux-persistor -> ttps://github.com/rt2zz/redux-persist
++ 💫 Redux-persistor -> https://github.com/rt2zz/redux-persist
 + 🚀 React-router -> https://reactrouter.com/docs/en/v6
 + 🎨 Material UI -> https://mui.com/material-ui/getting-started/installation/
 + 🧮 Firebase / Firestore -> https://firebase.google.com/docs
